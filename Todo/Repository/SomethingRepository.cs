@@ -2,7 +2,6 @@
 using ToDo.Data;
 using ToDo.Dtos;
 using ToDo.Interfaces;
-using ToDo.Migrations;
 using ToDo.Models;
 
 
@@ -46,9 +45,25 @@ namespace ToDo.Repository
             return await _context.Somethings.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Models.Something?> UpdateAsync(UpdateSomethingRequestDto somethingRequestDto, int id)
+        public async Task<Models.Something?> UpdateAsync(int id, UpdateSomethingRequestDto somethingRequestDto)
         {
-            throw new NotImplementedException();
+            var something = await _context.Somethings.FirstOrDefaultAsync(s => s.Id == id);
+            if(something == null)
+            {
+                return null;
+            }
+            something.Somethings =something.Somethings;
+            if (something.Status == true)
+            {
+                somethingRequestDto.Status = false;
+            }
+            else
+            {
+                somethingRequestDto.Status = true;
+            }
+            something.Status = somethingRequestDto.Status;
+            await _context.SaveChangesAsync();
+            return something;
         }
     }
 }

@@ -56,11 +56,29 @@ namespace ToDo.Controllers
             }
             var somethingModel = new Something
             {
-                Somethings=somethingRequestDto.Somethings
+                Somethings = somethingRequestDto.Somethings,
+                Status = somethingRequestDto.Status
             };
             var createdSomething = await _somethingRepo.CreateAsync(somethingModel);
             return CreatedAtAction(nameof(GetById), new {id=createdSomething.Id}, createdSomething);
         }
+        [EnableCors("AllowSpecificOrigin")]
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromForm] UpdateSomethingRequestDto somethingRequestDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var somethingModel = await _somethingRepo.UpdateAsync(id, somethingRequestDto);
+            if(somethingModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(somethingModel);
+        }
+
         [EnableCors("AllowSpecificOrigin")]
         [HttpDelete]
         [Route("{id:int}")]

@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace ToDo.Migrations
+namespace Todo.Migrations
 {
     /// <inheritdoc />
-    public partial class Something : Migration
+    public partial class something : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,8 @@ namespace ToDo.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Somethings = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Somethings = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -7,7 +7,7 @@ using ToDo.Data;
 
 #nullable disable
 
-namespace ToDo.Migrations
+namespace Todo.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
     partial class ApplicationDBContextModelSnapshot : ModelSnapshot
@@ -32,6 +32,9 @@ namespace ToDo.Migrations
                     b.Property<string>("Somethings")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

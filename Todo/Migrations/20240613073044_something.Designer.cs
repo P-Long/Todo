@@ -8,11 +8,11 @@ using ToDo.Data;
 
 #nullable disable
 
-namespace ToDo.Migrations
+namespace Todo.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240611181507_Something")]
-    partial class Something
+    [Migration("20240613073044_something")]
+    partial class something
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace ToDo.Migrations
                     b.Property<string>("Somethings")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
